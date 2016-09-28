@@ -1,7 +1,7 @@
 pkgname=wait4net
-pkgver="1.1"
+pkgver="1.2"
 pkgrel="1"
-pkgdesc="wait for network to get connected, then optionally run the command passed as a parameter"
+pkgdesc="wait for network to get connected, then optionally run a command"
 arch=('any')
 license=('GPL')
 source=("$pkgname")
