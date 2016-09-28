@@ -1,0 +1,14 @@
+#! /bin/sh
+
+log="/tmp/wait4net.$$.log"
+
+time_left=60
+poll_itvl=5
+while ! ip addr list | grep '\<inet\>' | grep -vq '127.0.0.1' && [ $time_left -gt 0 ]; do
+	echo "Sleeping for $poll_itvl seconds" >> "$log"
+	sleep $poll_itvl
+	time_left=$((time_left-poll_itvl))
+done
+ip addr list >> "$log"
+
+[ "$1" = "" ] && echo "network connected" || "$@"
