@@ -1,18 +1,19 @@
 #! /bin/sh
 
 gotip() {
-	ip addr list | grep '\<inet\>' | grep -vq '127.0.0.1'
+	ip addr list | grep '\<inet\>' | grep -qvE '127.0.0.1|vmnet|docker'
 }
 
 timer=60
 poll=5
 
-while getopts t:p: opt; do
-   case "$opt" in
-      t) timer="$OPTARG" ;;
-      p) poll="$OPTARG" ;;
-      *) exit 8;;
-   esac
+while getopts t:p:h opt; do
+	case "$opt" in
+		t) timer="$OPTARG" ;;
+		p) poll="$OPTARG"  ;;
+		h) echo "$0 [-t] [-p] [cmd [arg...]]"; exit 0;;
+		*) exit 8;;
+	esac
 done
 
 shift $((OPTIND-1))
@@ -23,6 +24,8 @@ while ! gotip && [ $timer -gt 0 ]; do
 	timer=$((timer-poll))
 done
 
-if [ -n "$1" ] && gotip; then
+gotip || exit 63
+
+if [ -n "$1" ]; then
 	"$@"
 fi

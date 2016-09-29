@@ -6,7 +6,12 @@ wait for network to get connected, then optionally run the command passed as a p
 usage: `wait4net [-t] [-p] [cmd [arg ...]]`
 
 Options<br/>
-`-t`: Timer, defaults 60 seconds<br/>
-`-p`: Polling interval, defaults to 5 seconds
+`-t <seconds>`: Timer, defaults 60 seconds<br/>
+`-p <seconds>`: Polling interval, defaults to 5 seconds
 
-Examples: `wait4net` or `wait4net SpiderOakONE`
+Examples:
+```
+wait4net
+wait4net SpiderOakONE
+wait4net -t 600 -p 60
+```

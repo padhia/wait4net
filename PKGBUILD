@@ -1,5 +1,5 @@
 pkgname=wait4net
-pkgver="1.2"
+pkgver="1.3"
 pkgrel="1"
 pkgdesc="wait for network to get connected, then optionally run a command"
 arch=('any')
